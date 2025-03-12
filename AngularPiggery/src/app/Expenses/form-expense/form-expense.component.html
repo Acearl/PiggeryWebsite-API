@@ -1,0 +1,23 @@
+<p>form-expense works!</p>
+<form (submit)="saveChanges()" [formGroup]="form">
+    <mat-form-field appearance="fill">
+        <p>Cost GHc</p>
+        <mat-label>cost</mat-label>
+        <input formControlName="cost" matInput placeholder="Cost" >
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <p>Choose a date of purchase</p>
+        <input formControlName="date" matInput [matDatepicker]="picker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle style="color:blue" matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <p>Notes</p>
+        <textarea formControlName="notes" matInput placeholder="Ex. Maize feed"></textarea>
+    </mat-form-field>
+    <div>
+        <button mat-flat-button color="primary" [disabled]="form.invalid">Save Changes</button>
+        <a mat-stroked-button routerLink="/expenses">Cancel</a>
+    </div>
+</form>

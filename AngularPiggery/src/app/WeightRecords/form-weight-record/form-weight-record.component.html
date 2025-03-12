@@ -1,0 +1,26 @@
+<p>form-weight-record works!</p>
+<form (submit)="saveChanges()" [formGroup]="form">
+
+    <mat-form-field appearance="fill">
+        <p>PigID</p>
+        <mat-label>pigID</mat-label>
+        <input formControlName="pigID" matInput placeholder="PigID" >
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <p>Choose a date of weighing</p>
+        <input formControlName="date" matInput [matDatepicker]="picker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle style="color:blue" matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <p>WeightKG</p>
+        <mat-label>WeightKG</mat-label>
+        <input formControlName="WeightKG" matInput placeholder="WeightKG">
+    </mat-form-field>
+    <div>
+        <button mat-flat-button color="primary" [disabled]="form.invalid">Save Changes</button>
+        <a mat-stroked-button routerLink="/weight-records">Cancel</a>
+    </div>
+</form>

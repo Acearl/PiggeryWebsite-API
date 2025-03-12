@@ -1,0 +1,6 @@
+<p>edit-pen works!</p>
+<h2>Edit pen</h2>
+
+<app-form-pen *ngIf="model" (onSaveChanges)="saveChanges($event)"></app-form-pen>
+
+<mat-spinner *ngIf="!model"></mat-spinner>

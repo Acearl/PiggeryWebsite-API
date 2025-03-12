@@ -1,0 +1,4 @@
+<p>edit-pig works!</p>
+<app-form-pig *ngIf="model" (onSaveChanges)="saveChanges($event)"></app-form-pig>
+
+<mat-spinner *ngIf="!model"></mat-spinner>

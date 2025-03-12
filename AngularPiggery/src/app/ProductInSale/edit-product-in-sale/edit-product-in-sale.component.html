@@ -1,0 +1,6 @@
+<p>edit-product-in-sale works!</p>
+
+
+<app-form-productInSale *ngIf="model" (onSaveChanges)="saveChanges($event)"></app-form-productInSale>
+
+<mat-spinner *ngIf="!model"></mat-spinner>

@@ -1,0 +1,55 @@
+<p>sales</p>
+
+<button mat-flat-button color="primary" routerLink="/sales/create">Create new</button>
+
+<span *ngIf="sales == null">
+    <img
+    src="https://media1.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif?cid=ecf05e4762fh6sr1b4z70csyd48mkljxhgr0nxz16glgr1ig&rid=giphy.gif"
+  />
+  <p>Fetching Data. This may take a while. Ask Andrew For help if this isnt loaded within a minute</p>
+</span>
+
+<table mat-table [dataSource]="sales" class="mat-elevation-z8">
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let myRowData; columns: displayedColumns"></tr>
+
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let element">{{element.id}}</td>
+    </ng-container>
+    <ng-container matColumnDef="customer">
+        <th mat-header-cell *matHeaderCellDef>customer</th>
+        <td mat-cell *matCellDef="let element">{{element.customer}}</td>
+    </ng-container>
+    <ng-container matColumnDef="dateSold">
+        <th mat-header-cell *matHeaderCellDef>dateSold</th>
+        <td mat-cell *matCellDef="let element">{{element.date|date:"longDate"}}</td>
+    </ng-container>
+    <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef>Cost GHs</th>
+        <td mat-cell *matCellDef="let element">{{element.price}}</td>
+    </ng-container>
+    <ng-container matColumnDef="notes">
+        <th mat-header-cell *matHeaderCellDef>notes</th>
+        <td mat-cell *matCellDef="let element">{{element.notes}}</td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element">
+            <a mat-flat-button color="primary" routerLink="/sales/edit/{{element.id}}">Edit</a>
+            <a mat-flat-button color="warn"  routerLink="/sales/delete/{{element.id}}"
+            [swal]="{
+                title: 'Confirmation',
+                text: 'Are you sure that you want to delete the record?',
+                showCancelButton: true
+            }"
+            (confirm)="delete(element.id)">Delete</a>
+        </td>
+    </ng-container>
+</table>
+
+<mat-paginator [pageSizeOptions]="[5,10,20,50]" showFirstLastButtons
+[length]="totalAmountOfRecords" [pageSize]="pageSize" (page)="updatePagination($event)">
+
+</mat-paginator>

@@ -1,0 +1,7 @@
+<p>edit-medical-record works!</p>
+<p>edit-medical-record works!</p>
+<h2>Edit Medical Record</h2>
+
+<app-form-medical-record *ngIf="model" (onSaveChanges)="saveChanges($event)"></app-form-medical-record>
+
+<mat-spinner *ngIf="!model"></mat-spinner>

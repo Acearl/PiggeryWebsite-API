@@ -1,0 +1,134 @@
+<p>pigs</p>
+
+<button mat-flat-button color="primary" routerLink="/pigs/create">Create new</button>
+
+<span *ngIf="pigs == null">
+    <img
+    src="https://media1.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif?cid=ecf05e4762fh6sr1b4z70csyd48mkljxhgr0nxz16glgr1ig&rid=giphy.gif"
+  />
+  <p>Fetching Data. This may take a while. Ask Andrew For help if this isnt loaded within a minute</p>
+</span>
+
+<table mat-table [dataSource]="pigs" class="mat-elevation-z8">
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let myRowData; columns: displayedColumns"></tr>
+
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let element">{{element.id}}</td>
+    </ng-container>
+    <ng-container matColumnDef="birthDate">
+        <th mat-header-cell *matHeaderCellDef>birthDate</th>
+        <td mat-cell *matCellDef="let element">{{element.birthDate}}</td>
+    </ng-container>
+    <ng-container matColumnDef="designation">
+        <th mat-header-cell *matHeaderCellDef>designation</th>
+        <td mat-cell *matCellDef="let element">{{element.designation}}</td>
+    </ng-container>
+    <ng-container matColumnDef="fatherID">
+        <th mat-header-cell *matHeaderCellDef>fatherID</th>
+        <td mat-cell *matCellDef="let element">{{element.fatherID}}</td>
+    </ng-container>
+    <ng-container matColumnDef="motherID">
+        <th mat-header-cell *matHeaderCellDef>motherID</th>
+        <td mat-cell *matCellDef="let element">{{element.motherID}}</td>
+    </ng-container>
+    <ng-container matColumnDef="notes">
+        <th mat-header-cell *matHeaderCellDef>notes</th>
+        <td mat-cell *matCellDef="let element">{{element.notes}}</td>
+    </ng-container>
+    <ng-container matColumnDef="pen">
+        <th mat-header-cell *matHeaderCellDef>pen</th>
+        <td mat-cell *matCellDef="let element">{{element.penID}}</td>
+    </ng-container>
+    <ng-container matColumnDef="sex">
+        <th mat-header-cell *matHeaderCellDef>sex</th>
+        <td mat-cell *matCellDef="let element">{{element.sex}}</td>
+    </ng-container>
+    <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>status</th>
+        <td mat-cell *matCellDef="let element">{{element.status}}</td>
+    </ng-container>
+    <ng-container matColumnDef="castrationStatus">
+        <th mat-header-cell *matHeaderCellDef>castrationStatus</th>
+        <td mat-cell *matCellDef="let element">{{element.status}}</td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element">
+            <a mat-flat-button color="primary" routerLink="/pigs/edit/{{element.id}}">Edit</a>
+            <a mat-flat-button color="warn"  routerLink="/pigs/delete/{{element.id}}"
+            [swal]="{
+                title: 'Confirmation',
+                text: 'Are you sure that you want to delete the record?',
+                showCancelButton: true
+            }"
+            (confirm)="delete(element.id)">Delete</a>
+        </td>
+    </ng-container>
+</table>
+
+<mat-paginator [pageSizeOptions]="[5,10,20,50]" showFirstLastButtons
+[length]="totalAmountOfRecords" [pageSize]="pageSize" (page)="updatePagination($event)">
+
+</mat-paginator>
+
+<!-- 
+<p>pigs</p>
+
+<button mat-flat-button color="primary" routerLink="/pigs/create">Create new</button>
+
+<span *ngIf="pigs == null">
+    <img
+    src="https://media1.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif?cid=ecf05e4762fh6sr1b4z70csyd48mkljxhgr0nxz16glgr1ig&rid=giphy.gif"
+  />
+  <p>Fetching Data. This may take a while. Ask Andrew For help if this isnt loaded within a minute</p>
+</span>
+<p>test1</p>
+<table mat-table [dataSource]="pigs" class="mat-elevation-z8">
+    <p>{{pigs[0].id}} test</p>
+    <p>test2</p>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let myRowData; columns: displayedColumns"></tr>
+    
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>pigID</th>
+        <td mat-cell *matCellDef="let element">{{element.id}}</td>
+    </ng-container>
+    <ng-container matColumnDef="pen">
+        <th mat-header-cell *matHeaderCellDef>penID</th>
+        <td mat-cell *matCellDef="let element">{{element.pen}}</td>
+    </ng-container>
+    <ng-container matColumnDef="birthDate">
+        <th mat-header-cell *matHeaderCellDef>Date Weighed</th>
+        <td mat-cell *matCellDef="let element">{{element.dateWeighed|date:"longDate"}}</td>
+    </ng-container>
+    <ng-container matColumnDef="cost">
+        <th mat-header-cell *matHeaderCellDef>Weight KG</th>
+        <td mat-cell *matCellDef="let element">{{element.weight}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="notes">
+        <th mat-header-cell *matHeaderCellDef>Pig</th>
+        <td mat-cell *matCellDef="let element"><a routerLink="/pigs/{{element.pigID}}">Associated Pig</a></td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element">
+            <a mat-flat-button color="primary" routerLink="/pigs/edit/{{element.id}}">Edit</a>
+            <a mat-flat-button color="warn"  routerLink="/pigs/delete/{{element.id}}"
+            [swal]="{
+                title: 'Confirmation',
+                text: 'Are you sure that you want to delete the record?',
+                showCancelButton: true
+            }"
+            (confirm)="delete(element.id)">Delete</a>
+        </td>
+    </ng-container>
+</table>
+
+<mat-paginator [pageSizeOptions]="[5,10,20,50]" showFirstLastButtons
+[length]="totalAmountOfRecords" [pageSize]="pageSize" (page)="updatePagination($event)">
+
+</mat-paginator> -->

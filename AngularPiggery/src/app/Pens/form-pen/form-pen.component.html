@@ -1,0 +1,11 @@
+<p>form-pen works!</p>
+<form (submit)="saveChanges()" [formGroup]="form">
+    <mat-form-field appearance="fill">
+        <p>Notes</p>
+        <textarea formControlName="notes" matInput placeholder="Ex. Pen 1, water leak"></textarea>
+    </mat-form-field>
+    <div>
+        <button mat-flat-button color="primary" [disabled]="form.invalid">Save Changes</button>
+        <a mat-stroked-button routerLink="/pens">Cancel</a>
+    </div>
+</form>

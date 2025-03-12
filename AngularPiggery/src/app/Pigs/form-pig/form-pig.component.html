@@ -1,0 +1,61 @@
+<p>form-pig works!</p>
+<form (submit)="saveChanges()" [formGroup]="form">
+
+    <mat-form-field appearance="fill">
+        <p>Pen Id</p>
+        <mat-label>Pen</mat-label>
+        <input formControlName="pen" matInput placeholder="1" >
+    </mat-form-field>
+    
+    <mat-form-field appearance="fill">
+        <p>Sex</p>
+        <input formControlName="sex" matInput>
+        <mat-select>
+            <mat-option value="M">M</mat-option>
+            <mat-option value="F">F</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <p>Mother ID</p>
+        <input formControlName="motherID" matInput placeholder="0" >
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <p>Father ID</p>
+        <input formControlName="fatherID" matInput placeholder="0" >
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <p>Designation</p>
+        <mat-radio-group>
+            <mat-radio-button value="0">{{designation[0].toString()}}</mat-radio-button>
+            <mat-radio-button value="1">{{designation[1]}}</mat-radio-button>
+            <mat-radio-button value="2">{{designation[2]}}</mat-radio-button>
+            <mat-radio-button value="3">{{designation[3]}}</mat-radio-button>
+        </mat-radio-group>
+        
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <p>Birth Date</p>
+        <input formControlName="date" matInput [matDatepicker]="picker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle style="color:blue" matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <p>Notes</p>
+        <textarea formControlName="notes" matInput placeholder="Ex. Maize feed"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <p>Status</p>
+    </mat-form-field>
+
+    <div>
+        <button mat-flat-button color="primary" [disabled]="form.invalid">Save Changes</button>
+        <a mat-stroked-button routerLink="/expenses">Cancel</a>
+    </div>
+</form>

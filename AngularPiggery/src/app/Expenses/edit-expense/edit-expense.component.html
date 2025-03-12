@@ -1,0 +1,6 @@
+<p>edit-expense works!</p>
+<h2>Edit Expense</h2>
+
+<app-form-expense *ngIf="model" (onSaveChanges)="saveChanges($event)"></app-form-expense>
+
+<mat-spinner *ngIf="!model"></mat-spinner>
